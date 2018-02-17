@@ -13,9 +13,11 @@ Tiny board is powered by 4-pin Molex connector,
 suitable for mini-ITX builds where space is at a premium.
 
 Schematic:
+
 ![Schematic 5v](docs/schematic5v.jpg)
 
 Photo:
+
 ![Photo 5v](docs/photo5v.jpg)
 
 ## 3.3v PCI Express build
@@ -23,9 +25,11 @@ This abomination is based on an old sound card,
 and can be plugged into PCI-e port.
 
 Schematic:
+
 ![Schematic 3.3v](docs/schematic33v.jpg)
 
 Photo:
+
 ![Photo 3.3v](docs/photo33v.jpg)
 
 # Software
