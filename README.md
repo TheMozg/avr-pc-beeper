@@ -6,7 +6,7 @@ with Imperial March.
 
 # Hardware
 PC beeper is connected to AVR instead of motherboard.
-To detect POST signal AVR microcontroller reads mother speaker ground pin.
+To detect POST signal AVR microcontroller reads motherboard speaker ground pin.
 I've created 2 devices in different form factors.
 Both are based on `ATtiny13A` microcontroller (simply because I had these lying around).
 
