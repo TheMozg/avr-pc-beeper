@@ -3,6 +3,11 @@
 #include <avr/pgmspace.h>
 
 #include "notes.h"
+#include "music.h"
+
+void melody_play(melody_t melody) {
+  music_play(melody.notes, melody.count, melody.bpm, melody.delay);
+}
 
 static const note_t imperial_march_notes[] PROGMEM = {
   {LA3,   NOTE_QUARTER},
@@ -88,9 +93,161 @@ static const note_t imperial_march_notes[] PROGMEM = {
   {LA3,   NOTE_HALF}
 };
 
-const melody_t imperial_march = {
-  .notes = imperial_march_notes,
-  .count = 70,
-  .delay = 50,
-  .bpm   = 112
+static const note_t morrowind_notes[121] PROGMEM = {
+  {C4, NOTE_EIGHTH},
+  {D4, NOTE_EIGHTH},
+  {Eb4, NOTE_QUARTER},
+  {Eb4, NOTE_QUARTER},
+
+  {Eb4, NOTE_EIGHTH},
+  {F4, NOTE_EIGHTH},
+  {G4, NOTE_QUARTER},
+  {G4, NOTE_QUARTER},
+
+  {G4, NOTE_EIGHTH},
+  {Bb4, NOTE_EIGHTH},
+  {F4, NOTE_QUARTER_DOT},
+  
+  {G4, NOTE_SIXTEENTH},
+  {F4, NOTE_SIXTEENTH},
+  {Eb4, NOTE_EIGHTH},
+  {D4, NOTE_EIGHTH},
+  {C4, NOTE_HALF}
 };
+
+static const note_t russian_anthem_notes[112] PROGMEM = {
+  {G4, NOTE_EIGHTH},
+  {C5, NOTE_QUARTER},
+  {G4, NOTE_EIGHTH_DOT},
+  {LA4, NOTE_SIXTEENTH},
+  {B4, NOTE_QUARTER},
+  {E4, NOTE_EIGHTH},
+  {E4, NOTE_EIGHTH},
+  {LA4, NOTE_QUARTER},
+  {G4, NOTE_EIGHTH_DOT},
+  {F4, NOTE_SIXTEENTH},
+  {G4, NOTE_QUARTER},
+  {C4, NOTE_EIGHTH},
+  {C4, NOTE_EIGHTH},
+  {D4, NOTE_QUARTER},
+  {D4, NOTE_EIGHTH},
+  {E4, NOTE_EIGHTH},
+  {F4, NOTE_QUARTER},
+  {F4, NOTE_EIGHTH},
+  {G4, NOTE_EIGHTH},
+  {LA4, NOTE_QUARTER},
+  {B4, NOTE_EIGHTH},
+  {C5, NOTE_EIGHTH},
+  {D5, NOTE_QUARTER_DOT},
+  {G4, NOTE_EIGHTH},
+  {E5, NOTE_QUARTER},
+  {D5, NOTE_EIGHTH_DOT},
+  {C5, NOTE_SIXTEENTH},
+  {D5, NOTE_QUARTER},
+  {B4, NOTE_EIGHTH},
+  {G4, NOTE_EIGHTH},
+  {C5, NOTE_QUARTER},
+  {B4, NOTE_EIGHTH_DOT},
+  {LA4, NOTE_SIXTEENTH},
+  {C5, NOTE_QUARTER},
+  {E4, NOTE_EIGHTH},
+  {E4, NOTE_EIGHTH},
+  {LA4, NOTE_QUARTER},
+  {G4, NOTE_EIGHTH},
+  {F4, NOTE_EIGHTH},
+  {G4, NOTE_QUARTER},
+  {C4, NOTE_EIGHTH},
+  {C4, NOTE_EIGHTH},
+  {C5, NOTE_QUARTER},
+  {B4, NOTE_EIGHTH_DOT},
+  {LA4, NOTE_SIXTEENTH},
+  {G4, NOTE_HALF},
+  {E5, NOTE_HALF},
+  {D5, NOTE_EIGHTH},
+  {C5, NOTE_EIGHTH},
+  {B4, NOTE_EIGHTH},
+  {C5, NOTE_EIGHTH},
+  {D5, NOTE_QUARTER_DOT},
+  {G4, NOTE_EIGHTH},
+  {G4, NOTE_HALF},
+  {C5, NOTE_HALF},
+  {B4, NOTE_EIGHTH},
+  {LA4, NOTE_EIGHTH},
+  {G4, NOTE_EIGHTH},
+  {LA4, NOTE_EIGHTH},
+  {B4, NOTE_QUARTER_DOT},
+  {E4, NOTE_EIGHTH},
+  {E4, NOTE_QUARTER},
+  {PAUSE, NOTE_QUARTER},
+  {C5, NOTE_QUARTER},
+  {LA4, NOTE_EIGHTH_DOT},
+  {B4, NOTE_SIXTEENTH},
+  {C5, NOTE_QUARTER},
+  {LA4, NOTE_EIGHTH_DOT},
+  {B4, NOTE_SIXTEENTH},
+  {C5, NOTE_QUARTER},
+  {LA4, NOTE_EIGHTH},
+  {C5, NOTE_EIGHTH},
+  {C5, NOTE_HALF},
+  {F5, NOTE_HALF},
+  {E5, NOTE_EIGHTH},
+  {D5, NOTE_EIGHTH},
+  {C5, NOTE_EIGHTH},
+  {D5, NOTE_EIGHTH},
+  {E5, NOTE_QUARTER_DOT},
+  {C5, NOTE_EIGHTH},
+  {C5, NOTE_HALF},
+  {D5, NOTE_HALF},
+  {C5, NOTE_EIGHTH},
+  {B4, NOTE_EIGHTH},
+  {LA4, NOTE_EIGHTH},
+  {B4, NOTE_EIGHTH},
+  {C5, NOTE_QUARTER_DOT},
+  {LA4, NOTE_EIGHTH},
+  {LA4, NOTE_HALF},
+  {C5, NOTE_QUARTER},
+  {B4, NOTE_EIGHTH},
+  {LA4, NOTE_EIGHTH},
+  {G4, NOTE_QUARTER},
+  {C4, NOTE_EIGHTH_DOT},
+  {C4, NOTE_SIXTEENTH},
+  {C5, NOTE_QUARTER},
+  {B4, NOTE_EIGHTH_DOT},
+  {LA4, NOTE_SIXTEENTH},
+  {G4, NOTE_QUARTER_DOT},
+  {G4, NOTE_EIGHTH},
+  {C5, NOTE_QUARTER},
+  {G4, NOTE_EIGHTH_DOT},
+  {LA4, NOTE_SIXTEENTH},
+  {B4, NOTE_QUARTER},
+  {E4, NOTE_EIGHTH},
+  {E4, NOTE_EIGHTH},
+  {LA4, NOTE_QUARTER},
+  {G4, NOTE_EIGHTH_DOT},
+  {F4, NOTE_SIXTEENTH},
+  {G4, NOTE_QUARTER},
+  {C4, NOTE_EIGHTH},
+  {C4, NOTE_EIGHTH}
+};
+
+const melody_t melodies[3] = {
+  {
+    .notes = imperial_march_notes,
+    .count = 18,
+    .delay = 100,
+    .bpm   = 110
+  }, 
+  {
+    .notes = morrowind_notes,
+    .count = 16,
+    .delay = 30,
+    .bpm   = 82
+  },
+  {
+    .notes = russian_anthem_notes,
+    .count = 23,
+    .delay = 75,
+    .bpm   = 76
+  }
+};
+

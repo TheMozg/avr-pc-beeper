@@ -1,8 +1,8 @@
 .SUFFIXES:
 
 TARGET   = beeper
-MCU      = attiny13a
-DUDE_MCU = attiny13
+MCU      = attiny85
+DUDE_MCU = attiny85
 PROGR    = avrisp
 PORT     = /dev/ttyS0
 
@@ -10,7 +10,7 @@ CC       = avr-gcc
 OBJCOPY  = avr-objcopy
 DUDE     = avrdude
 
-CFLAGS   = -Wall -Werror -Os -DF_CPU=1200000UL
+CFLAGS   = -Wall -Werror -Os -DF_CPU=8000000UL
 PFLAGS   = -b 19200
 
 SRCDIR   = src

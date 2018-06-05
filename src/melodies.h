@@ -9,4 +9,6 @@ typedef struct {
   uint8_t        bpm;   // tempo
 } melody_t;
 
-extern const melody_t imperial_march;
+void melody_play(melody_t melody);
+
+extern const melody_t melodies[3];

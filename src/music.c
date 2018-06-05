@@ -10,11 +10,12 @@
 // multiplication is optimized by compiler
 uint16_t note_value_to_ms(note_value_t value, uint8_t bpm) {
   switch (value) {
-    case NOTE_HALF:       return 60UL * 1000UL * 4UL * 1/2 / bpm;
-    case NOTE_QUARTER:    return 60UL * 1000UL * 4UL * 1/4 / bpm;
-    case NOTE_EIGHTH:     return 60UL * 1000UL * 4UL * 1/8 / bpm;
-    case NOTE_EIGHTH_DOT: return 60UL * 1000UL * 4UL * 3/16 / bpm;
-    case NOTE_SIXTEENTH:  return 60UL * 1000UL * 4UL * 1/16 / bpm;
+    case NOTE_HALF:        return 60UL * 1000UL * 4UL * 1/2 / bpm;
+    case NOTE_QUARTER:     return 60UL * 1000UL * 4UL * 1/4 / bpm;
+    case NOTE_QUARTER_DOT: return 60UL * 1000UL * 4UL * 3/8 / bpm;
+    case NOTE_EIGHTH:      return 60UL * 1000UL * 4UL * 1/8 / bpm;
+    case NOTE_EIGHTH_DOT:  return 60UL * 1000UL * 4UL * 3/16 / bpm;
+    case NOTE_SIXTEENTH:   return 60UL * 1000UL * 4UL * 1/16 / bpm;
   }
   return 0;
 }
