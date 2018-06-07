@@ -1,15 +1,15 @@
 # AVR PC Beeper
-Replace boring POST beep with Imperial March or Morrowind theme
+Replace boring POST beep with Imperial March or Morrowind theme!
 
 ![PCI and mini-ITX builds](docs/pic.jpg)
 
 ## Features
 * 2 boards with integrated speaker, which play selected tune on boot
 * 4 modes (controlled by 2 switches):
-  0. (0b00) - passthrough, POST beep is played as-is
-  1. (0b01) - Star Wars Imperial March
-  2. (0b10) - Morrowind theme (aka Nerevar Rising / Call of Magic)
-  3. (0b11) - Russian anthem
+  * (0b00) - passthrough, POST beep is played as-is
+  * (0b01) - Star Wars Imperial March
+  * (0b10) - Morrowind theme (aka Nerevar Rising / Call of Magic)
+  * (0b11) - Russian anthem
 * Adjustable volume (blue potentiometer)
 
 ## Hardware
@@ -73,5 +73,5 @@ for example when using Windows Subsystem for Linux:
 
 ## Revisions
 * rev. 2 (current)
-* rev. 1 - first 2 boards, see corresponding branch
+* [rev. 1](https://github.com/TheMozg/avr-pc-beeper/tree/rev.1) - first 2 boards, see corresponding branch
 
