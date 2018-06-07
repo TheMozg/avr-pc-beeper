@@ -1,34 +1,57 @@
 # AVR PC Beeper
-Perfect contraption for loyal citizens of the Empire. Replace boring POST beep
-with Imperial March.
+Replace boring POST beep with Imperial March or Morrowind theme
 
-![PCI-e and Molex builds](docs/pic.jpg)
+![PCI and mini-ITX builds](docs/pic.jpg)
 
-# Hardware
-PC beeper is connected to AVR instead of motherboard.
-To detect POST signal AVR microcontroller reads motherboard speaker ground pin.
+## Features
+* 2 boards with integrated speaker, which play selected tune on boot
+* 4 modes (controlled by 2 switches):
+  0. (0b00) - passthrough, POST beep is played as-is
+  1. (0b01) - Star Wars Imperial March
+  2. (0b10) - Morrowind theme (aka Nerevar Rising / Call of Magic)
+  3. (0b11) - Russian anthem
+* Adjustable volume (blue potentiometer)
+
+## Hardware
+To detect POST signal AVR microcontroller reads motherboard speaker ground pin `-SP`.
 I've created 2 devices in different form factors.
-Both are based on `ATtiny13A` microcontroller (simply because I had these lying around).
+Both are based on `ATtiny85` microcontroller
+(simply because I had these lying around, you may use a different one).
 
-## 5v Molex build
-Tiny board is powered by 4-pin Molex connector, 
-suitable for mini-ITX builds where space is at a premium.
+Schematic for both boards is mostly the same
+(mini-ITX board doesn't have `SW3` switch):
 
-**Schematic:**
+![Schematic](docs/schematic.jpg)
 
-![Schematic 5v](docs/schematic5v.jpg)
+### PCI board
+Large board which plugs directly into PCI port.
+Has an external panel, which exposes 2 toggle switches (`SW1` and `SW2`) and a potentiometer shaft (`P1`).
+Note that when installed, back panel may be flipped. To select passthrough/tune
+correctly, orient the panel so that volume shaft is the left side.
 
-## 3.3v PCI Express build
-This abomination is based on an old sound card,
-and can be plugged into PCI-e port.
+This board also has a dedicated dip switch (`SW3`) which disables POST trigger.
+When this dip switch is ON, avr doesn't read motherboard speaker pin (`-SP`).
+Instead, it plays selected tune once after being powered.
+This means the tune may be played after waking from sleep mode.
+This dip switch is ignored when passthrough is selected.
 
-**Schematic:**
+### Mini-ITX board
+Tiny board, suitable for mini-ITX builds where space is at premium.
+Tune/passthrough is selected with 2 on-board dip switches (`SW1` and `SW2`).
+Unlike PCI build, there is no dip switch to disable POST trigger (`SW3`).
+The board must be manually connected to a 5v power source with wires.
 
-![Schematic 3.3v](docs/schematic33v.jpg)
+Pin order (top-down, board is positioned so that pins are on the left side):
+1. `+5V` - power source, you can use speaker+ pin on the motherboard
+2. `-SP` - trigger pin, connects to speaker- pin on the motherboard
+3. `gnd` - you can use ground pin from any free port on the motherboard
 
-# Software
+Known issue: when volume is set above ~90%, the board may start playing satanic
+screeches or otherwise behave strangely.
 
-## Build
+## Software
+
+### How to build
 Install required packages:
 
 * `avr-gcc`
@@ -37,11 +60,18 @@ Install required packages:
 
 Run `make` to build `.hex` file.
 
-## Flash
+### How to flash
 You can use any AVR ISP programmer supported by `avrdude`.
-I am using Arduino as ISP, to use other programmer modify `PROGR` variable in `Makefile`.
+I am using Arduino as ISP,
+to use other programmer modify `PROGR` variable in `Makefile`.
 
 Connect the programmer and run `make flash PORT=<usbport>` to upload `.hex` file to AVR.
-You may need superuser privileges, for example when using Windows Subsystem for Linux:
+You may need superuser privileges,
+for example when using Windows Subsystem for Linux:
 
-`sudo make flash PORT=/dev/ttyS3` 
+`sudo make flash PORT=/dev/ttyS3`
+
+## Revisions
+* rev. 2 (current)
+* rev. 1 - first 2 boards, see corresponding branch
+
